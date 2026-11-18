@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:grl="http:///grl.ecore" xmlns:urn="http:///urn.ecore" name="URNspec" author="ralphazrak" created="November 18, 2026, 4:26:16&#x202f;PM EST" modified="November 18, 2026, 5:08:00&#x202f;PM EST" specVersion="2" urnVersion="1.27" nextGlobalID="93">
+<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:grl="http:///grl.ecore" xmlns:urn="http:///urn.ecore" name="URNspec" author="ralphazrak" created="November 18, 2026, 4:26:16&#x202f;PM EST" modified="November 18, 2026, 5:14:17&#x202f;PM EST" specVersion="3" urnVersion="1.27" nextGlobalID="93">
   <ucmspec>
     <scenarioGroups name="ScenarioGroup5" id="5">
       <scenarios name="ScenarioDef6" id="6"/>
@@ -39,27 +39,27 @@
   </grlspec>
   <urndef>
     <specDiagrams xsi:type="grl:GRLGraph" name="GRLGraph2" id="2">
-      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef32" id="32" x="632" y="604" contRef="14" pred="//@urndef/@specDiagrams.0/@connections.0 //@urndef/@specDiagrams.0/@connections.1" def="31">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef32" id="32" x="694" y="619" contRef="14" pred="//@urndef/@specDiagrams.0/@connections.0 //@urndef/@specDiagrams.0/@connections.1" def="31">
         <metadata name="_height" value="46"/>
         <metadata name="_width" value="109"/>
       </nodes>
-      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef38" id="38" x="539" y="758" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.0" def="37">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef38" id="38" x="608" y="747" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.0" def="37">
         <metadata name="_height" value="45"/>
         <metadata name="_width" value="110"/>
       </nodes>
-      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef40" id="40" x="749" y="744" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.1" def="39">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef40" id="40" x="801" y="735" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.1" def="39">
         <metadata name="_height" value="64"/>
         <metadata name="_width" value="110"/>
       </nodes>
-      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef52" id="52" x="705" y="907" contRef="14" pred="//@urndef/@specDiagrams.0/@connections.2 //@urndef/@specDiagrams.0/@connections.3" def="51">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef52" id="52" x="761" y="871" contRef="14" pred="//@urndef/@specDiagrams.0/@connections.2 //@urndef/@specDiagrams.0/@connections.3" def="51">
         <metadata name="_height" value="45"/>
         <metadata name="_width" value="110"/>
       </nodes>
-      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef54" id="54" x="580" y="1016" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.2" def="53">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef54" id="54" x="646" y="962" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.2" def="53">
         <metadata name="_height" value="45"/>
         <metadata name="_width" value="110"/>
       </nodes>
-      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef56" id="56" x="832" y="1013" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.3" def="55">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef56" id="56" x="878" y="959" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.3" def="55">
         <metadata name="_height" value="64"/>
         <metadata name="_width" value="110"/>
       </nodes>
@@ -87,7 +87,7 @@
         <metadata name="_height" value="58"/>
         <metadata name="_width" value="124"/>
       </nodes>
-      <contRefs xsi:type="grl:ActorRef" name="ActorRef14" id="14" x="301" y="524" width="815" height="659" contDef="13" nodes="32 38 40 52 54 56">
+      <contRefs xsi:type="grl:ActorRef" name="ActorRef14" id="14" x="389" y="553" width="751" height="548" contDef="13" nodes="32 38 40 52 54 56">
         <label deltaX="-14" deltaY="21"/>
       </contRefs>
       <contRefs xsi:type="grl:ActorRef" name="ActorRef18" id="18" x="417" y="47" width="641" height="417" contDef="17" nodes="67 71 73 80 82 84">
