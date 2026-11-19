@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:grl="http:///grl.ecore" xmlns:urn="http:///urn.ecore" xmlns:ucm.map="http:///ucm/map.ecore" name="URNspec" author="ralphazrak" created="November 18, 2026, 4:26:16&#x202f;PM EST" modified="November 18, 2026, 5:08:00&#x202f;PM EST" specVersion="2" urnVersion="1.27" nextGlobalID="150">
+<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="http:///fm.ecore" xmlns:grl="http:///grl.ecore" xmlns:urn="http:///urn.ecore" xmlns:ucm.map="http:///ucm/map.ecore" name="URNspec" author="ralphazrak" created="November 18, 2026, 4:26:16&#x202f;PM EST" modified="November 18, 2026, 5:08:00&#x202f;PM EST" specVersion="2" urnVersion="1.27" nextGlobalID="176">
   <ucmspec>
     <scenarioGroups name="OrderScenarios" id="5">
       <scenarios name="OrderFulfilled_StableQueue" id="6">
@@ -45,6 +45,14 @@
     <intElements name="Control Retrieval Costs" id="79" linksDest="89 90" refs="80"/>
     <intElements name="Reduce labor needed for picking" id="81" linksSrc="89" refs="82"/>
     <intElements name="Limit Equipment and Maintenance Costs" id="83" linksSrc="90" refs="84"/>
+    <intElements xsi:type="fm:Feature" name="Warehouse Management System" id="150" linksDest="158 159 160" refs="165"/>
+    <intElements xsi:type="fm:Feature" name="Product Retrieval" id="151" linksDest="161 162" linksSrc="158" decompositionType="Or" refs="166"/>
+    <intElements xsi:type="fm:Feature" name="Robot Retrieval" id="152" linksSrc="161" refs="167" selectable="true"/>
+    <intElements xsi:type="fm:Feature" name="Manual Retrieval" id="153" linksSrc="162" refs="168" selectable="true"/>
+    <intElements xsi:type="fm:Feature" name="Order Handover" id="154" linksDest="163 164" linksSrc="159" decompositionType="Xor" refs="169"/>
+    <intElements xsi:type="fm:Feature" name="Shipping Delivery" id="155" linksSrc="163" refs="170" selectable="true"/>
+    <intElements xsi:type="fm:Feature" name="In-Store Pickup" id="156" linksSrc="164" refs="171" selectable="true"/>
+    <intElements xsi:type="fm:Feature" name="Order Queue Sensor" id="157" linksSrc="160" refs="172" selectable="true"/>
     <actors name="Employee" id="13" contRefs="14"/>
     <actors name="Warehouse Operator" id="17" contRefs="18"/>
     <links xsi:type="grl:Contribution" name="Contribution46" id="46" refs="//@urndef/@specDiagrams.0/@connections.0" dest="31" src="37"/>
@@ -55,8 +63,48 @@
     <links xsi:type="grl:Contribution" name="Contribution77" id="77" refs="//@urndef/@specDiagrams.0/@connections.5" dest="66" src="72"/>
     <links xsi:type="grl:Contribution" name="Contribution89" id="89" refs="//@urndef/@specDiagrams.0/@connections.6" dest="79" src="81"/>
     <links xsi:type="grl:Contribution" name="Contribution90" id="90" refs="//@urndef/@specDiagrams.0/@connections.7" dest="79" src="83"/>
-    <groups name="StrategiesGroup3" id="3" strategies="4"/>
-    <strategies name="EvaluationStrategy4" id="4" author="ralphazrak" group="3"/>
+    <links xsi:type="fm:MandatoryFMLink" name="MandatoryFMLink158" id="158" refs="//@urndef/@specDiagrams.2/@connections.0" dest="150" src="151" quantitativeContribution="50"/>
+    <links xsi:type="fm:MandatoryFMLink" name="MandatoryFMLink159" id="159" refs="//@urndef/@specDiagrams.2/@connections.1" dest="150" src="154" quantitativeContribution="50"/>
+    <links xsi:type="fm:OptionalFMLink" name="OptionalFMLink160" id="160" refs="//@urndef/@specDiagrams.2/@connections.2" dest="150" src="157" quantitativeContribution="0"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition161" id="161" refs="//@urndef/@specDiagrams.2/@connections.3" dest="151" src="152"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition162" id="162" refs="//@urndef/@specDiagrams.2/@connections.4" dest="151" src="153"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition163" id="163" refs="//@urndef/@specDiagrams.2/@connections.5" dest="154" src="155"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition164" id="164" refs="//@urndef/@specDiagrams.2/@connections.6" dest="154" src="156"/>
+    <groups name="Feature Configurations" id="3" strategies="174 175"/>
+    <strategies name="Robot Retrieval, Shipping Delivery, with Queue Sensor" id="174" description="Feature configuration of a fully automated distribution warehouse: Robot Retrieval is the only retrieval method (Manual Retrieval deselected), orders are handed over to a shipping company, and the optional Order Queue Sensor is deployed.&#10;Mandatory features (Product Retrieval, Order Handover) are selected automatically by the tool.&#10;Valid configuration: Warehouse Management System evaluates to 100, exactly one member of the XOR group Order Handover is selected, and at least one member of the IOR group Product Retrieval is selected." group="3">
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="152">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="0" qualitativeEvaluation="None" intElement="153">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="155">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="0" qualitativeEvaluation="None" intElement="156">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="157">
+        <kpiEvalValueSet/>
+      </evaluations>
+    </strategies>
+    <strategies name="Manual Retrieval, In-Store Pickup, without Queue Sensor" id="175" description="Feature configuration of a small store warehouse: Manual Retrieval is the only retrieval method (Robot Retrieval deselected), orders are prepared for in-store customer pickup, and no Order Queue Sensor is deployed.&#10;Mandatory features (Product Retrieval, Order Handover) are selected automatically by the tool.&#10;Valid configuration: Warehouse Management System evaluates to 100, exactly one member of the XOR group Order Handover is selected, and at least one member of the IOR group Product Retrieval is selected." group="3">
+      <evaluations evaluation="0" qualitativeEvaluation="None" intElement="152">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="153">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="0" qualitativeEvaluation="None" intElement="155">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="156">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="0" qualitativeEvaluation="None" intElement="157">
+        <kpiEvalValueSet/>
+      </evaluations>
+    </strategies>
     <impactModel/>
     <indicatorGroup name="Time" id="7" isRedesignCategory="true"/>
     <indicatorGroup name="Cost" id="8" isRedesignCategory="true"/>
@@ -287,6 +335,55 @@
       <connections xsi:type="ucm.map:NodeConnection" source="127" target="128"/>
       <connections xsi:type="ucm.map:NodeConnection" source="128" target="129"/>
       <comments description="Code has been specified for the following responsibilities (all in the WMS component):&#10;- activate retrieval methods: sets robotActive/manualActive from the selected retrieval features and the initial queueLength&#10;- update inventory: decrements productsRemaining and moves on to the next product (alternates inAutomatedZone)&#10;- adapt retrieval methods: feedback loop - takes the sensor's newQueueLength and recomputes robotActive/manualActive for the remaining products&#10;Rule: with both retrieval methods deployed, robots (automated zone, high-demand products) are only activated when queueLength &gt; 10; employees handle the remaining products. With one method deployed, that method is always active.&#10;Feature (GRL) variables used: _GRL_Robot_Retrieval, _GRL_Manual_Retrieval, _GRL_Order_Queue_Sensor, _GRL_Shipping_Delivery, _GRL_In_Store_Pickup (selected = 100)." x="40" y="1540" width="700" height="220"/>
+    </specDiagrams>
+    <specDiagrams xsi:type="fm:FeatureDiagram" name="WMSFeatures" id="173">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef165" id="165" x="520" y="60" pred="//@urndef/@specDiagrams.2/@connections.0 //@urndef/@specDiagrams.2/@connections.1 //@urndef/@specDiagrams.2/@connections.2" def="150">
+        <metadata name="_width" value="200"/>
+        <metadata name="_height" value="50"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef166" id="166" x="140" y="220" succ="//@urndef/@specDiagrams.2/@connections.0" pred="//@urndef/@specDiagrams.2/@connections.3 //@urndef/@specDiagrams.2/@connections.4" def="151">
+        <metadata name="_width" value="160"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef169" id="169" x="575" y="220" succ="//@urndef/@specDiagrams.2/@connections.1" pred="//@urndef/@specDiagrams.2/@connections.5 //@urndef/@specDiagrams.2/@connections.6" def="154">
+        <metadata name="_width" value="160"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef172" id="172" x="900" y="220" succ="//@urndef/@specDiagrams.2/@connections.2" def="157">
+        <metadata name="_width" value="170"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef167" id="167" x="40" y="380" succ="//@urndef/@specDiagrams.2/@connections.3" def="152">
+        <metadata name="_width" value="150"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef168" id="168" x="240" y="380" succ="//@urndef/@specDiagrams.2/@connections.4" def="153">
+        <metadata name="_width" value="150"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef170" id="170" x="480" y="380" succ="//@urndef/@specDiagrams.2/@connections.5" def="155">
+        <metadata name="_width" value="150"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef171" id="171" x="680" y="380" succ="//@urndef/@specDiagrams.2/@connections.6" def="156">
+        <metadata name="_width" value="150"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <connections xsi:type="grl:LinkRef" source="166" target="165" link="158">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="169" target="165" link="159">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="172" target="165" link="160">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="167" target="166" link="161"/>
+      <connections xsi:type="grl:LinkRef" source="168" target="166" link="162"/>
+      <connections xsi:type="grl:LinkRef" source="170" target="169" link="163"/>
+      <connections xsi:type="grl:LinkRef" source="171" target="169" link="164"/>
+      <comments description="ECSE 326 - Software Requirements Engineering&#10;Term: Fall 2026&#10;Assignment #4 - Warehouse Management Software (WMS) product line&#10;Team number: 22&#10;Team members: Janelle Tam, Ralph Azrak, Ziang Wang" x="40" y="480" width="470" height="130"/>
+      <comments description="COMMONALITIES (part of every WMS product):&#10;- Warehouse Management System (root)&#10;- Product Retrieval (mandatory): every deployment must be able to retrieve products for an order&#10;- Order Handover (mandatory): every order is packaged by an employee and then handed over&#10;&#10;VARIABILITIES:&#10;- Product Retrieval is an IOR feature group: Robot Retrieval, Manual Retrieval, or both. With both, robots retrieve the high-demand products of the automated zone and employees the remaining products of the manual zone.&#10;- Order Handover is an XOR feature group: Shipping Delivery or In-Store Pickup, depending on the type of warehouse.&#10;- Order Queue Sensor is an optional feature: it monitors the current order queue length, which is used to decide which retrieval method or combination of methods to activate.&#10;&#10;CROSS-TREE CONSTRAINTS: none are needed. Every configuration allowed by the tree is a meaningful WMS product, and the only dependencies between features (at least one retrieval method, exactly one handover type) are already expressed by the IOR and XOR feature groups. The Order Queue Sensor is most useful when both retrieval methods are deployed, but it is not required by either of them: with a single retrieval method the sensor reading is still used to activate or deactivate that method, so no requires/excludes constraint applies.&#10;&#10;Note: activating and deactivating a retrieval method is run-time behaviour, not a feature selection; it is modelled in the use case map (variables robotActive and manualActive)." x="40" y="640" width="1030" height="380"/>
     </specDiagrams>
     <responsibilities name="place order" id="130" respRefs="105"/>
     <responsibilities name="activate retrieval methods" id="131" respRefs="106" expression="robotActive = (_GRL_Robot_Retrieval == 100) &amp;&amp; ((queueLength &gt; 10) || (_GRL_Manual_Retrieval != 100));&#10;manualActive = (_GRL_Manual_Retrieval == 100);"/>
