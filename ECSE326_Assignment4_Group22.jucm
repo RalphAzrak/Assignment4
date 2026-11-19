@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fm="http:///fm.ecore" xmlns:grl="http:///grl.ecore" xmlns:ucm.map="http:///ucm/map.ecore" xmlns:urn="http:///urn.ecore" name="URNspec" author="ralphazrak" created="November 18, 2026, 4:26:16&#x202f;PM EST" modified="November 19, 2026, 1:44:06&#x202f;PM EST" specVersion="3" urnVersion="1.27" nextGlobalID="866">
+  <ucmspec>
+    <scenarioGroups name="OrderScenarios" id="5">
+      <scenarios name="OrderFulfilled_StableQueue" id="6">
+        <postconditions label="all products retrieved" expression="productsRemaining == 0"/>
+        <initializations value="5" variable="143"/>
+        <initializations value="5" variable="144"/>
+        <initializations value="2" variable="145"/>
+        <initializations value="false" variable="146"/>
+        <initializations value="false" variable="147"/>
+        <initializations value="false" variable="148"/>
+        <startPoints startPoint="104"/>
+        <endPoints endPoint="129"/>
+      </scenarios>
+      <scenarios name="OrderFulfilled_QueueSpike_RetrievalAdapted" id="149">
+        <postconditions label="all products retrieved" expression="productsRemaining == 0"/>
+        <initializations value="5" variable="143"/>
+        <initializations value="25" variable="144"/>
+        <initializations value="2" variable="145"/>
+        <initializations value="false" variable="146"/>
+        <initializations value="false" variable="147"/>
+        <initializations value="false" variable="148"/>
+        <startPoints startPoint="104"/>
+        <endPoints endPoint="129"/>
+      </scenarios>
+    </scenarioGroups>
+    <variables name="queueLength" id="143" type="integer"/>
+    <variables name="newQueueLength" id="144" type="integer"/>
+    <variables name="productsRemaining" id="145" type="integer"/>
+    <variables name="inAutomatedZone" id="146"/>
+    <variables name="robotActive" id="147"/>
+    <variables name="manualActive" id="148"/>
+  </ucmspec>
+  <grlspec>
+    <intElements name="Reduce Physical Workload" id="31" linksDest="46 47" refs="32"/>
+    <intElements name="Reduce Walking to Shelves" id="37" linksSrc="46" refs="38"/>
+    <intElements name="Reduce Carrying products from storage" id="39" linksDest="636" linksSrc="47" refs="40"/>
+    <intElements name="Keep Work Predictable" id="51" linksDest="61 63" refs="52"/>
+    <intElements name="Make retrieval instructions clear" id="53" linksSrc="61" refs="54"/>
+    <intElements name="Minimize Interruptions when retrieval methods change" id="55" linksSrc="63" refs="56"/>
+    <intElements name="Keep Order Fulfillment Timely" id="66" linksDest="76 77" refs="67"/>
+    <intElements name="Reduce Product Retrieval Time" id="70" linksSrc="76" refs="71"/>
+    <intElements name="Respond to changes in order queue length" id="72" linksDest="864" linksSrc="77" refs="73"/>
+    <intElements name="Control Retrieval Costs" id="79" linksDest="89 90" refs="80"/>
+    <intElements name="Reduce labor needed for picking" id="81" linksSrc="89" refs="82"/>
+    <intElements name="Limit Equipment and Maintenance Costs" id="83" linksDest="638" linksSrc="90" refs="84"/>
+    <intElements xsi:type="fm:Feature" name="Warehouse Management System" id="150" linksDest="158 159 160" refs="165"/>
+    <intElements xsi:type="fm:Feature" name="Product Retrieval" id="151" linksDest="161 162" linksSrc="158" decompositionType="Or" refs="166"/>
+    <intElements xsi:type="fm:Feature" name="Robot Retrieval" id="152" linksSrc="161 636 638" refs="167 633" selectable="true"/>
+    <intElements xsi:type="fm:Feature" name="Manual Retrieval" id="153" linksSrc="162" refs="168" selectable="true"/>
+    <intElements xsi:type="fm:Feature" name="Order Handover" id="154" linksDest="163 164" linksSrc="159" decompositionType="Xor" refs="169"/>
+    <intElements xsi:type="fm:Feature" name="Shipping Delivery" id="155" linksSrc="163" refs="170" selectable="true"/>
+    <intElements xsi:type="fm:Feature" name="In-Store Pickup" id="156" linksSrc="164" refs="171" selectable="true"/>
+    <intElements xsi:type="fm:Feature" name="Order Queue Sensor" id="157" linksSrc="160 864" refs="172 863" selectable="true"/>
+    <actors name="Employee" id="13" contRefs="14"/>
+    <actors name="Warehouse Operator" id="17" contRefs="18"/>
+    <links xsi:type="grl:Contribution" name="Contribution46" id="46" refs="//@urndef/@specDiagrams.0/@connections.0" dest="31" src="37"/>
+    <links xsi:type="grl:Contribution" name="Contribution47" id="47" refs="//@urndef/@specDiagrams.0/@connections.1" dest="31" src="39"/>
+    <links xsi:type="grl:Contribution" name="Contribution61" id="61" refs="//@urndef/@specDiagrams.0/@connections.2" dest="51" src="53"/>
+    <links xsi:type="grl:Contribution" name="Contribution63" id="63" refs="//@urndef/@specDiagrams.0/@connections.3" dest="51" src="55"/>
+    <links xsi:type="grl:Contribution" name="Contribution76" id="76" refs="//@urndef/@specDiagrams.0/@connections.4" dest="66" src="70"/>
+    <links xsi:type="grl:Contribution" name="Contribution77" id="77" refs="//@urndef/@specDiagrams.0/@connections.5" dest="66" src="72"/>
+    <links xsi:type="grl:Contribution" name="Contribution89" id="89" refs="//@urndef/@specDiagrams.0/@connections.6" dest="79" src="81"/>
+    <links xsi:type="grl:Contribution" name="Contribution90" id="90" refs="//@urndef/@specDiagrams.0/@connections.7" dest="79" src="83"/>
+    <links xsi:type="fm:MandatoryFMLink" name="MandatoryFMLink158" id="158" refs="//@urndef/@specDiagrams.2/@connections.0" dest="150" src="151" quantitativeContribution="50"/>
+    <links xsi:type="fm:MandatoryFMLink" name="MandatoryFMLink159" id="159" refs="//@urndef/@specDiagrams.2/@connections.1" dest="150" src="154" quantitativeContribution="50"/>
+    <links xsi:type="fm:OptionalFMLink" name="OptionalFMLink160" id="160" refs="//@urndef/@specDiagrams.2/@connections.2" dest="150" src="157" quantitativeContribution="0"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition161" id="161" refs="//@urndef/@specDiagrams.2/@connections.3" dest="151" src="152"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition162" id="162" refs="//@urndef/@specDiagrams.2/@connections.4" dest="151" src="153"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition163" id="163" refs="//@urndef/@specDiagrams.2/@connections.5" dest="154" src="155"/>
+    <links xsi:type="grl:Decomposition" name="Decomposition164" id="164" refs="//@urndef/@specDiagrams.2/@connections.6" dest="154" src="156"/>
+    <links xsi:type="grl:Contribution" name="Contribution636" id="636" refs="//@urndef/@specDiagrams.0/@connections.8" dest="39" src="152"/>
+    <links xsi:type="grl:Contribution" name="Contribution638" id="638" refs="//@urndef/@specDiagrams.0/@connections.9" dest="83" src="152" contribution="Hurt" quantitativeContribution="-25"/>
+    <links xsi:type="grl:Contribution" name="Contribution864" id="864" refs="//@urndef/@specDiagrams.0/@connections.10" dest="72" src="157"/>
+    <groups name="Feature Configurations" id="3" strategies="174 175"/>
+    <strategies name="Robot Retrieval, Shipping Delivery, with Queue Sensor" id="174" description="Feature configuration of a fully automated distribution warehouse: Robot Retrieval is the only retrieval method (Manual Retrieval deselected), orders are handed over to a shipping company, and the optional Order Queue Sensor is deployed.&#xA;Mandatory features (Product Retrieval, Order Handover) are selected automatically by the tool.&#xA;Valid configuration: Warehouse Management System evaluates to 100, exactly one member of the XOR group Order Handover is selected, and at least one member of the IOR group Product Retrieval is selected." group="3">
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="152">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations intElement="153">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="155">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations intElement="156">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="157">
+        <kpiEvalValueSet/>
+      </evaluations>
+    </strategies>
+    <strategies name="Manual Retrieval, In-Store Pickup, without Queue Sensor" id="175" description="Feature configuration of a small store warehouse: Manual Retrieval is the only retrieval method (Robot Retrieval deselected), orders are prepared for in-store customer pickup, and no Order Queue Sensor is deployed.&#xA;Mandatory features (Product Retrieval, Order Handover) are selected automatically by the tool.&#xA;Valid configuration: Warehouse Management System evaluates to 100, exactly one member of the XOR group Order Handover is selected, and at least one member of the IOR group Product Retrieval is selected." group="3">
+      <evaluations intElement="152">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="153">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations intElement="155">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations evaluation="100" qualitativeEvaluation="Satisfied" intElement="156">
+        <kpiEvalValueSet/>
+      </evaluations>
+      <evaluations intElement="157">
+        <kpiEvalValueSet/>
+      </evaluations>
+    </strategies>
+    <impactModel/>
+    <indicatorGroup name="Time" id="7" isRedesignCategory="true"/>
+    <indicatorGroup name="Cost" id="8" isRedesignCategory="true"/>
+    <indicatorGroup name="Quality" id="9" isRedesignCategory="true"/>
+    <indicatorGroup name="Flexibility" id="10" isRedesignCategory="true"/>
+    <featureModel/>
+  </grlspec>
+  <urndef>
+    <responsibilities name="place order" id="130" respRefs="105"/>
+    <responsibilities name="activate retrieval methods" id="131" expression="robotActive = (_GRL_Robot_Retrieval == 100) &amp;&amp; ((queueLength > 10) || (_GRL_Manual_Retrieval != 100));&#xA;manualActive = (_GRL_Manual_Retrieval == 100);" respRefs="106"/>
+    <responsibilities name="autonomously retrieve product" id="132" respRefs="109"/>
+    <responsibilities name="hand over product to employee" id="133" respRefs="110"/>
+    <responsibilities name="manually retrieve product" id="134" respRefs="111"/>
+    <responsibilities name="scan product" id="135" respRefs="113"/>
+    <responsibilities name="update inventory" id="136" expression="productsRemaining = productsRemaining - 1;&#xA;inAutomatedZone = !inAutomatedZone;" respRefs="114"/>
+    <responsibilities name="send queue length reading" id="137" respRefs="116"/>
+    <responsibilities name="adapt retrieval methods" id="138" expression="queueLength = newQueueLength;&#xA;robotActive = (_GRL_Robot_Retrieval == 100) &amp;&amp; ((queueLength > 10) || (_GRL_Manual_Retrieval != 100));&#xA;manualActive = (_GRL_Manual_Retrieval == 100);" respRefs="117"/>
+    <responsibilities name="package order" id="139" respRefs="123"/>
+    <responsibilities name="hand over order to shipping company" id="140" respRefs="125"/>
+    <responsibilities name="prepare order for in-store pickup" id="141" respRefs="126"/>
+    <responsibilities name="receive products" id="142" respRefs="128"/>
+    <specDiagrams xsi:type="grl:GRLGraph" name="GRLGraph2" id="2">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef32" id="32" x="635" y="618" contRef="14" pred="//@urndef/@specDiagrams.0/@connections.0 //@urndef/@specDiagrams.0/@connections.1" def="31">
+        <metadata name="_height" value="46"/>
+        <metadata name="_width" value="109"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef38" id="38" x="542" y="772" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.0" def="37">
+        <metadata name="_height" value="45"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef40" id="40" x="798" y="756" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.1" pred="//@urndef/@specDiagrams.0/@connections.8" def="39">
+        <metadata name="_height" value="64"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef52" id="52" x="708" y="921" contRef="14" pred="//@urndef/@specDiagrams.0/@connections.2 //@urndef/@specDiagrams.0/@connections.3" def="51">
+        <metadata name="_height" value="45"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef54" id="54" x="583" y="1030" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.2" def="53">
+        <metadata name="_height" value="45"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef56" id="56" x="835" y="1027" contRef="14" succ="//@urndef/@specDiagrams.0/@connections.3" def="55">
+        <metadata name="_height" value="64"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef67" id="67" x="680" y="115" contRef="18" pred="//@urndef/@specDiagrams.0/@connections.4 //@urndef/@specDiagrams.0/@connections.5" def="66">
+        <metadata name="_height" value="45"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef71" id="71" x="603" y="205" contRef="18" succ="//@urndef/@specDiagrams.0/@connections.4" def="70">
+        <metadata name="_height" value="45"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef73" id="73" x="794" y="197" contRef="18" succ="//@urndef/@specDiagrams.0/@connections.5" pred="//@urndef/@specDiagrams.0/@connections.10" def="72">
+        <metadata name="_height" value="59"/>
+        <metadata name="_width" value="120"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef80" id="80" x="687" y="301" contRef="18" pred="//@urndef/@specDiagrams.0/@connections.6 //@urndef/@specDiagrams.0/@connections.7" def="79">
+        <metadata name="_height" value="45"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef82" id="82" x="637" y="374" contRef="18" succ="//@urndef/@specDiagrams.0/@connections.6" def="81">
+        <metadata name="_height" value="45"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef84" id="84" x="786" y="368" contRef="18" succ="//@urndef/@specDiagrams.0/@connections.7" pred="//@urndef/@specDiagrams.0/@connections.9" def="83">
+        <metadata name="_height" value="58"/>
+        <metadata name="_width" value="124"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef633" id="633" x="79" y="871" succ="//@urndef/@specDiagrams.0/@connections.8 //@urndef/@specDiagrams.0/@connections.9" def="152">
+        <metadata name="_height" value="45"/>
+        <metadata name="_width" value="110"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef863" id="863" x="184" y="345" succ="//@urndef/@specDiagrams.0/@connections.10" def="157">
+        <metadata name="_height" value="49"/>
+        <metadata name="_width" value="130"/>
+      </nodes>
+      <contRefs xsi:type="grl:ActorRef" name="ActorRef14" id="14" x="304" y="538" width="815" height="659" contDef="13" nodes="32 38 40 52 54 56">
+        <label deltaX="-209" deltaY="-11"/>
+      </contRefs>
+      <contRefs xsi:type="grl:ActorRef" name="ActorRef18" id="18" x="417" y="47" width="641" height="417" contDef="17" nodes="67 71 73 80 82 84">
+        <label/>
+      </contRefs>
+      <connections xsi:type="grl:LinkRef" source="38" target="32" link="46">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="40" target="32" link="47">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="54" target="52" link="61">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="56" target="52" link="63">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="71" target="67" link="76">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="73" target="67" link="77">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="82" target="80" link="89">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="84" target="80" link="90">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="633" target="40" link="636">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="633" target="84" link="638">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="863" target="73" link="864">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+    </specDiagrams>
+    <specDiagrams xsi:type="ucm.map:UCMmap" name="OrderFulfillment" id="103">
+      <nodes xsi:type="ucm.map:StartPoint" name="orderPlaced" id="104" x="150" y="110" contRef="94" succ="//@urndef/@specDiagrams.1/@connections.0" scenarioStartPoints="//@ucmspec/@scenarioGroups.0/@scenarios.0/@startPoints.0 //@ucmspec/@scenarioGroups.0/@scenarios.1/@startPoints.0">
+        <label/>
+        <precondition expression="true"/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef105" id="105" x="150" y="190" contRef="94" succ="//@urndef/@specDiagrams.1/@connections.1" pred="//@urndef/@specDiagrams.1/@connections.0" respDef="130">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef106" id="106" x="450" y="190" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.2" pred="//@urndef/@specDiagrams.1/@connections.1" respDef="131">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin107" id="107" x="450" y="280" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.3" pred="//@urndef/@specDiagrams.1/@connections.2 //@urndef/@specDiagrams.1/@connections.20">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork108" id="108" x="450" y="360" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.4 //@urndef/@specDiagrams.1/@connections.5" pred="//@urndef/@specDiagrams.1/@connections.3">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef109" id="109" x="1110" y="440" contRef="100" succ="//@urndef/@specDiagrams.1/@connections.6" pred="//@urndef/@specDiagrams.1/@connections.4" respDef="132">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef110" id="110" x="1110" y="530" contRef="100" succ="//@urndef/@specDiagrams.1/@connections.7" pred="//@urndef/@specDiagrams.1/@connections.6" respDef="133">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef111" id="111" x="720" y="440" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.8" pred="//@urndef/@specDiagrams.1/@connections.5" respDef="134">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin112" id="112" x="800" y="610" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.9" pred="//@urndef/@specDiagrams.1/@connections.7 //@urndef/@specDiagrams.1/@connections.8">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef113" id="113" x="800" y="690" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.10" pred="//@urndef/@specDiagrams.1/@connections.9" respDef="135">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef114" id="114" x="450" y="690" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.11" pred="//@urndef/@specDiagrams.1/@connections.10" respDef="136">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork115" id="115" x="450" y="780" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.12 //@urndef/@specDiagrams.1/@connections.13" pred="//@urndef/@specDiagrams.1/@connections.11">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef116" id="116" x="1380" y="850" contRef="102" succ="//@urndef/@specDiagrams.1/@connections.14" pred="//@urndef/@specDiagrams.1/@connections.12" respDef="137">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef117" id="117" x="530" y="920" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.15" pred="//@urndef/@specDiagrams.1/@connections.14" respDef="138">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EmptyPoint" name="EmptyPoint118" id="118" x="370" y="880" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.16" pred="//@urndef/@specDiagrams.1/@connections.13">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin119" id="119" x="450" y="990" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.17" pred="//@urndef/@specDiagrams.1/@connections.15 //@urndef/@specDiagrams.1/@connections.16">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork120" id="120" x="450" y="1070" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.18 //@urndef/@specDiagrams.1/@connections.21" pred="//@urndef/@specDiagrams.1/@connections.17">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EmptyPoint" name="EmptyPoint121" id="121" x="320" y="1070" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.19" pred="//@urndef/@specDiagrams.1/@connections.18">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EmptyPoint" name="EmptyPoint122" id="122" x="320" y="280" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.20" pred="//@urndef/@specDiagrams.1/@connections.19">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef123" id="123" x="800" y="1150" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.22" pred="//@urndef/@specDiagrams.1/@connections.21" respDef="139">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork124" id="124" x="800" y="1230" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.23 //@urndef/@specDiagrams.1/@connections.24" pred="//@urndef/@specDiagrams.1/@connections.22">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef125" id="125" x="710" y="1310" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.25" pred="//@urndef/@specDiagrams.1/@connections.23" respDef="140">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef126" id="126" x="890" y="1310" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.26" pred="//@urndef/@specDiagrams.1/@connections.24" respDef="141">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin127" id="127" x="800" y="1390" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.27" pred="//@urndef/@specDiagrams.1/@connections.25 //@urndef/@specDiagrams.1/@connections.26">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef128" id="128" x="150" y="1390" contRef="94" succ="//@urndef/@specDiagrams.1/@connections.28" pred="//@urndef/@specDiagrams.1/@connections.27" respDef="142">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EndPoint" name="productsReceived" id="129" x="150" y="1470" contRef="94" pred="//@urndef/@specDiagrams.1/@connections.28" scenarioEndPoints="//@ucmspec/@scenarioGroups.0/@scenarios.0/@endPoints.0 //@ucmspec/@scenarioGroups.0/@scenarios.1/@endPoints.0">
+        <label/>
+        <postcondition expression="true"/>
+      </nodes>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef94" id="94" x="40" y="40" width="220" height="1480" contDef="93" nodes="104 105 128 129">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef96" id="96" x="290" y="40" width="320" height="1480" contDef="95" nodes="106 107 108 114 115 117 118 119 120 121 122">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef98" id="98" x="640" y="40" width="320" height="1480" contDef="97" nodes="111 112 113 123 124 125 126 127">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef100" id="100" x="990" y="40" width="240" height="1480" contDef="99" nodes="109 110">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef102" id="102" x="1260" y="40" width="240" height="1480" contDef="101" nodes="116">
+        <label/>
+      </contRefs>
+      <connections xsi:type="ucm.map:NodeConnection" source="104" target="105"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="105" target="106"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="106" target="107"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="107" target="108"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="108" target="109">
+        <condition label="[robot retrieval]" expression="robotActive &amp;&amp; (inAutomatedZone || !manualActive)"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="108" target="111">
+        <condition label="[manual retrieval]" expression="!(robotActive &amp;&amp; (inAutomatedZone || !manualActive))"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="109" target="110"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="110" target="112"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="111" target="112"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="112" target="113"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="113" target="114"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="114" target="115"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="115" target="116">
+        <condition label="[sensor installed]" expression="_GRL_Order_Queue_Sensor == 100"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="115" target="118">
+        <condition label="[no sensor]" expression="_GRL_Order_Queue_Sensor != 100"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="116" target="117"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="117" target="119"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="118" target="119"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="119" target="120"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="120" target="121">
+        <condition label="[more products]" expression="productsRemaining > 0"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="121" target="122"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="122" target="107"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="120" target="123">
+        <condition label="[all products retrieved]" expression="productsRemaining &lt;= 0"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="123" target="124"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="124" target="125">
+        <condition label="[shipping delivery]" expression="_GRL_Shipping_Delivery == 100"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="124" target="126">
+        <condition label="[in-store pickup]" expression="_GRL_In_Store_Pickup == 100"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="125" target="127"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="126" target="127"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="127" target="128"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="128" target="129"/>
+      <comments description="Code has been specified for the following responsibilities (all in the WMS component):&#xA;- activate retrieval methods: sets robotActive/manualActive from the selected retrieval features and the initial queueLength&#xA;- update inventory: decrements productsRemaining and moves on to the next product (alternates inAutomatedZone)&#xA;- adapt retrieval methods: feedback loop - takes the sensor's newQueueLength and recomputes robotActive/manualActive for the remaining products&#xA;Rule: with both retrieval methods deployed, robots (automated zone, high-demand products) are only activated when queueLength > 10; employees handle the remaining products. With one method deployed, that method is always active.&#xA;Feature (GRL) variables used: _GRL_Robot_Retrieval, _GRL_Manual_Retrieval, _GRL_Order_Queue_Sensor, _GRL_Shipping_Delivery, _GRL_In_Store_Pickup (selected = 100)." x="40" y="1540" width="700" height="220"/>
+    </specDiagrams>
+    <specDiagrams xsi:type="fm:FeatureDiagram" name="WMSFeatures" id="173">
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef165" id="165" x="520" y="60" pred="//@urndef/@specDiagrams.2/@connections.0 //@urndef/@specDiagrams.2/@connections.1 //@urndef/@specDiagrams.2/@connections.2" def="150">
+        <metadata name="_width" value="200"/>
+        <metadata name="_height" value="50"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef166" id="166" x="140" y="220" succ="//@urndef/@specDiagrams.2/@connections.0" pred="//@urndef/@specDiagrams.2/@connections.3 //@urndef/@specDiagrams.2/@connections.4" def="151">
+        <metadata name="_width" value="160"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef169" id="169" x="575" y="220" succ="//@urndef/@specDiagrams.2/@connections.1" pred="//@urndef/@specDiagrams.2/@connections.5 //@urndef/@specDiagrams.2/@connections.6" def="154">
+        <metadata name="_width" value="160"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef172" id="172" x="900" y="220" succ="//@urndef/@specDiagrams.2/@connections.2" def="157">
+        <metadata name="_width" value="170"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef167" id="167" x="40" y="380" succ="//@urndef/@specDiagrams.2/@connections.3" def="152">
+        <metadata name="_width" value="150"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef168" id="168" x="240" y="380" succ="//@urndef/@specDiagrams.2/@connections.4" def="153">
+        <metadata name="_width" value="150"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef170" id="170" x="480" y="380" succ="//@urndef/@specDiagrams.2/@connections.5" def="155">
+        <metadata name="_width" value="150"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <nodes xsi:type="grl:IntentionalElementRef" name="IntentionalElementRef171" id="171" x="680" y="380" succ="//@urndef/@specDiagrams.2/@connections.6" def="156">
+        <metadata name="_width" value="150"/>
+        <metadata name="_height" value="45"/>
+      </nodes>
+      <connections xsi:type="grl:LinkRef" source="166" target="165" link="158">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="169" target="165" link="159">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="172" target="165" link="160">
+        <label deltaX="30" deltaY="-30"/>
+      </connections>
+      <connections xsi:type="grl:LinkRef" source="167" target="166" link="161"/>
+      <connections xsi:type="grl:LinkRef" source="168" target="166" link="162"/>
+      <connections xsi:type="grl:LinkRef" source="170" target="169" link="163"/>
+      <connections xsi:type="grl:LinkRef" source="171" target="169" link="164"/>
+      <comments description="ECSE 326 - Software Requirements Engineering&#xA;Term: Fall 2026&#xA;Assignment #4 - Warehouse Management Software (WMS) product line&#xA;Team number: 22&#xA;Team members: Janelle Tam, Ralph Azrak, Ziang Wang" x="40" y="480" width="470" height="130"/>
+      <comments description="COMMONALITIES (part of every WMS product):&#xA;- Warehouse Management System (root)&#xA;- Product Retrieval (mandatory): every deployment must be able to retrieve products for an order&#xA;- Order Handover (mandatory): every order is packaged by an employee and then handed over&#xA;&#xA;VARIABILITIES:&#xA;- Product Retrieval is an IOR feature group: Robot Retrieval, Manual Retrieval, or both. With both, robots retrieve the high-demand products of the automated zone and employees the remaining products of the manual zone.&#xA;- Order Handover is an XOR feature group: Shipping Delivery or In-Store Pickup, depending on the type of warehouse.&#xA;- Order Queue Sensor is an optional feature: it monitors the current order queue length, which is used to decide which retrieval method or combination of methods to activate.&#xA;&#xA;CROSS-TREE CONSTRAINTS: none are needed. Every configuration allowed by the tree is a meaningful WMS product, and the only dependencies between features (at least one retrieval method, exactly one handover type) are already expressed by the IOR and XOR feature groups. The Order Queue Sensor is most useful when both retrieval methods are deployed, but it is not required by either of them: with a single retrieval method the sensor reading is still used to activate or deactivate that method, so no requires/excludes constraint applies.&#xA;&#xA;Note: activating and deactivating a retrieval method is run-time behaviour, not a feature selection; it is modelled in the use case map (variables robotActive and manualActive)." x="40" y="640" width="1030" height="380"/>
+    </specDiagrams>
+    <components name="Customer" id="93" contRefs="94" kind="Actor"/>
+    <components name="WMS" id="95" contRefs="96"/>
+    <components name="Employee" id="97" contRefs="98" kind="Actor"/>
+    <components name="Robot" id="99" contRefs="100" kind="Agent"/>
+    <components name="Order Queue Sensor" id="101" contRefs="102" kind="Actor"/>
+  </urndef>
+  <metadata name="_Use0to100EvaluationRange" value="false"/>
+  <dynamicContexts name="DynamicContext12" id="12" groups="11"/>
+  <dynamicContextGroups name="DynamicContextGroup11" id="11" contexts="12"/>
+  <timepointGroups/>
+</urn:URNspec>
