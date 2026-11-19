@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:grl="http:///grl.ecore" xmlns:urn="http:///urn.ecore" name="URNspec" author="ralphazrak" created="November 18, 2026, 4:26:16&#x202f;PM EST" modified="November 18, 2026, 5:08:00&#x202f;PM EST" specVersion="2" urnVersion="1.27" nextGlobalID="93">
+<urn:URNspec xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:grl="http:///grl.ecore" xmlns:urn="http:///urn.ecore" xmlns:ucm.map="http:///ucm/map.ecore" name="URNspec" author="ralphazrak" created="November 18, 2026, 4:26:16&#x202f;PM EST" modified="November 18, 2026, 5:08:00&#x202f;PM EST" specVersion="2" urnVersion="1.27" nextGlobalID="150">
   <ucmspec>
-    <scenarioGroups name="ScenarioGroup5" id="5">
-      <scenarios name="ScenarioDef6" id="6"/>
+    <scenarioGroups name="OrderScenarios" id="5">
+      <scenarios name="OrderFulfilled_StableQueue" id="6">
+        <initializations value="5" variable="143"/>
+        <initializations value="5" variable="144"/>
+        <initializations value="2" variable="145"/>
+        <initializations value="false" variable="146"/>
+        <initializations value="false" variable="147"/>
+        <initializations value="false" variable="148"/>
+        <startPoints startPoint="104"/>
+        <endPoints endPoint="129"/>
+        <postconditions label="all products retrieved" expression="productsRemaining == 0"/>
+      </scenarios>
+      <scenarios name="OrderFulfilled_QueueSpike_RetrievalAdapted" id="149">
+        <initializations value="5" variable="143"/>
+        <initializations value="25" variable="144"/>
+        <initializations value="2" variable="145"/>
+        <initializations value="false" variable="146"/>
+        <initializations value="false" variable="147"/>
+        <initializations value="false" variable="148"/>
+        <startPoints startPoint="104"/>
+        <endPoints endPoint="129"/>
+        <postconditions label="all products retrieved" expression="productsRemaining == 0"/>
+      </scenarios>
     </scenarioGroups>
+    <variables name="queueLength" id="143" type="integer"/>
+    <variables name="newQueueLength" id="144" type="integer"/>
+    <variables name="productsRemaining" id="145" type="integer"/>
+    <variables name="inAutomatedZone" id="146" type="boolean"/>
+    <variables name="robotActive" id="147" type="boolean"/>
+    <variables name="manualActive" id="148" type="boolean"/>
   </ucmspec>
   <grlspec>
     <intElements name="Reduce Physical Workload" id="31" linksDest="46 47" refs="32"/>
@@ -118,6 +145,167 @@
         <label deltaX="30" deltaY="-30"/>
       </connections>
     </specDiagrams>
+    <specDiagrams xsi:type="ucm.map:UCMmap" name="OrderFulfillment" id="103">
+      <nodes xsi:type="ucm.map:StartPoint" name="orderPlaced" id="104" x="150" y="110" contRef="94" succ="//@urndef/@specDiagrams.1/@connections.0" scenarioStartPoints="//@ucmspec/@scenarioGroups.0/@scenarios.0/@startPoints.0 //@ucmspec/@scenarioGroups.0/@scenarios.1/@startPoints.0">
+        <label/>
+        <precondition expression="true"/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef105" id="105" x="150" y="190" contRef="94" succ="//@urndef/@specDiagrams.1/@connections.1" pred="//@urndef/@specDiagrams.1/@connections.0" respDef="130">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef106" id="106" x="450" y="190" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.2" pred="//@urndef/@specDiagrams.1/@connections.1" respDef="131">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin107" id="107" x="450" y="280" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.3" pred="//@urndef/@specDiagrams.1/@connections.2 //@urndef/@specDiagrams.1/@connections.20">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork108" id="108" x="450" y="360" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.4 //@urndef/@specDiagrams.1/@connections.5" pred="//@urndef/@specDiagrams.1/@connections.3">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef109" id="109" x="1110" y="440" contRef="100" succ="//@urndef/@specDiagrams.1/@connections.6" pred="//@urndef/@specDiagrams.1/@connections.4" respDef="132">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef110" id="110" x="1110" y="530" contRef="100" succ="//@urndef/@specDiagrams.1/@connections.7" pred="//@urndef/@specDiagrams.1/@connections.6" respDef="133">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef111" id="111" x="720" y="440" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.8" pred="//@urndef/@specDiagrams.1/@connections.5" respDef="134">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin112" id="112" x="800" y="610" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.9" pred="//@urndef/@specDiagrams.1/@connections.7 //@urndef/@specDiagrams.1/@connections.8">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef113" id="113" x="800" y="690" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.10" pred="//@urndef/@specDiagrams.1/@connections.9" respDef="135">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef114" id="114" x="450" y="690" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.11" pred="//@urndef/@specDiagrams.1/@connections.10" respDef="136">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork115" id="115" x="450" y="780" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.12 //@urndef/@specDiagrams.1/@connections.13" pred="//@urndef/@specDiagrams.1/@connections.11">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef116" id="116" x="1380" y="850" contRef="102" succ="//@urndef/@specDiagrams.1/@connections.14" pred="//@urndef/@specDiagrams.1/@connections.12" respDef="137">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef117" id="117" x="530" y="920" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.15" pred="//@urndef/@specDiagrams.1/@connections.14" respDef="138">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EmptyPoint" name="EmptyPoint118" id="118" x="370" y="880" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.16" pred="//@urndef/@specDiagrams.1/@connections.13">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin119" id="119" x="450" y="990" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.17" pred="//@urndef/@specDiagrams.1/@connections.15 //@urndef/@specDiagrams.1/@connections.16">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork120" id="120" x="450" y="1070" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.18 //@urndef/@specDiagrams.1/@connections.21" pred="//@urndef/@specDiagrams.1/@connections.17">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EmptyPoint" name="EmptyPoint121" id="121" x="320" y="1070" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.19" pred="//@urndef/@specDiagrams.1/@connections.18">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EmptyPoint" name="EmptyPoint122" id="122" x="320" y="280" contRef="96" succ="//@urndef/@specDiagrams.1/@connections.20" pred="//@urndef/@specDiagrams.1/@connections.19">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef123" id="123" x="800" y="1150" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.22" pred="//@urndef/@specDiagrams.1/@connections.21" respDef="139">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrFork" name="OrFork124" id="124" x="800" y="1230" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.23 //@urndef/@specDiagrams.1/@connections.24" pred="//@urndef/@specDiagrams.1/@connections.22">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef125" id="125" x="710" y="1310" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.25" pred="//@urndef/@specDiagrams.1/@connections.23" respDef="140">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef126" id="126" x="890" y="1310" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.26" pred="//@urndef/@specDiagrams.1/@connections.24" respDef="141">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:OrJoin" name="OrJoin127" id="127" x="800" y="1390" contRef="98" succ="//@urndef/@specDiagrams.1/@connections.27" pred="//@urndef/@specDiagrams.1/@connections.25 //@urndef/@specDiagrams.1/@connections.26">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:RespRef" name="RespRef128" id="128" x="150" y="1390" contRef="94" succ="//@urndef/@specDiagrams.1/@connections.28" pred="//@urndef/@specDiagrams.1/@connections.27" respDef="142">
+        <label/>
+      </nodes>
+      <nodes xsi:type="ucm.map:EndPoint" name="productsReceived" id="129" x="150" y="1470" contRef="94" pred="//@urndef/@specDiagrams.1/@connections.28" scenarioEndPoints="//@ucmspec/@scenarioGroups.0/@scenarios.0/@endPoints.0 //@ucmspec/@scenarioGroups.0/@scenarios.1/@endPoints.0">
+        <label/>
+        <postcondition expression="true"/>
+      </nodes>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef94" id="94" x="40" y="40" width="220" height="1480" contDef="93" nodes="104 105 128 129">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef96" id="96" x="290" y="40" width="320" height="1480" contDef="95" nodes="106 107 108 114 115 117 118 119 120 121 122">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef98" id="98" x="640" y="40" width="320" height="1480" contDef="97" nodes="111 112 113 123 124 125 126 127">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef100" id="100" x="990" y="40" width="240" height="1480" contDef="99" nodes="109 110">
+        <label/>
+      </contRefs>
+      <contRefs xsi:type="ucm.map:ComponentRef" name="ComponentRef102" id="102" x="1260" y="40" width="240" height="1480" contDef="101" nodes="116">
+        <label/>
+      </contRefs>
+      <connections xsi:type="ucm.map:NodeConnection" source="104" target="105"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="105" target="106"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="106" target="107"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="107" target="108"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="108" target="109">
+        <condition label="[robot retrieval]" expression="robotActive &amp;&amp; (inAutomatedZone || !manualActive)"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="108" target="111">
+        <condition label="[manual retrieval]" expression="!(robotActive &amp;&amp; (inAutomatedZone || !manualActive))"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="109" target="110"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="110" target="112"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="111" target="112"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="112" target="113"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="113" target="114"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="114" target="115"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="115" target="116">
+        <condition label="[sensor installed]" expression="_GRL_Order_Queue_Sensor == 100"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="115" target="118">
+        <condition label="[no sensor]" expression="_GRL_Order_Queue_Sensor != 100"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="116" target="117"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="117" target="119"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="118" target="119"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="119" target="120"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="120" target="121">
+        <condition label="[more products]" expression="productsRemaining &gt; 0"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="121" target="122"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="122" target="107"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="120" target="123">
+        <condition label="[all products retrieved]" expression="productsRemaining &lt;= 0"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="123" target="124"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="124" target="125">
+        <condition label="[shipping delivery]" expression="_GRL_Shipping_Delivery == 100"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="124" target="126">
+        <condition label="[in-store pickup]" expression="_GRL_In_Store_Pickup == 100"/>
+      </connections>
+      <connections xsi:type="ucm.map:NodeConnection" source="125" target="127"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="126" target="127"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="127" target="128"/>
+      <connections xsi:type="ucm.map:NodeConnection" source="128" target="129"/>
+      <comments description="Code has been specified for the following responsibilities (all in the WMS component):&#10;- activate retrieval methods: sets robotActive/manualActive from the selected retrieval features and the initial queueLength&#10;- update inventory: decrements productsRemaining and moves on to the next product (alternates inAutomatedZone)&#10;- adapt retrieval methods: feedback loop - takes the sensor's newQueueLength and recomputes robotActive/manualActive for the remaining products&#10;Rule: with both retrieval methods deployed, robots (automated zone, high-demand products) are only activated when queueLength &gt; 10; employees handle the remaining products. With one method deployed, that method is always active.&#10;Feature (GRL) variables used: _GRL_Robot_Retrieval, _GRL_Manual_Retrieval, _GRL_Order_Queue_Sensor, _GRL_Shipping_Delivery, _GRL_In_Store_Pickup (selected = 100)." x="40" y="1540" width="700" height="220"/>
+    </specDiagrams>
+    <responsibilities name="place order" id="130" respRefs="105"/>
+    <responsibilities name="activate retrieval methods" id="131" respRefs="106" expression="robotActive = (_GRL_Robot_Retrieval == 100) &amp;&amp; ((queueLength &gt; 10) || (_GRL_Manual_Retrieval != 100));&#10;manualActive = (_GRL_Manual_Retrieval == 100);"/>
+    <responsibilities name="autonomously retrieve product" id="132" respRefs="109"/>
+    <responsibilities name="hand over product to employee" id="133" respRefs="110"/>
+    <responsibilities name="manually retrieve product" id="134" respRefs="111"/>
+    <responsibilities name="scan product" id="135" respRefs="113"/>
+    <responsibilities name="update inventory" id="136" respRefs="114" expression="productsRemaining = productsRemaining - 1;&#10;inAutomatedZone = !inAutomatedZone;"/>
+    <responsibilities name="send queue length reading" id="137" respRefs="116"/>
+    <responsibilities name="adapt retrieval methods" id="138" respRefs="117" expression="queueLength = newQueueLength;&#10;robotActive = (_GRL_Robot_Retrieval == 100) &amp;&amp; ((queueLength &gt; 10) || (_GRL_Manual_Retrieval != 100));&#10;manualActive = (_GRL_Manual_Retrieval == 100);"/>
+    <responsibilities name="package order" id="139" respRefs="123"/>
+    <responsibilities name="hand over order to shipping company" id="140" respRefs="125"/>
+    <responsibilities name="prepare order for in-store pickup" id="141" respRefs="126"/>
+    <responsibilities name="receive products" id="142" respRefs="128"/>
+    <components name="Customer" id="93" contRefs="94" kind="Actor"/>
+    <components name="WMS" id="95" contRefs="96"/>
+    <components name="Employee" id="97" contRefs="98" kind="Actor"/>
+    <components name="Robot" id="99" contRefs="100" kind="Agent"/>
+    <components name="Order Queue Sensor" id="101" contRefs="102" kind="Actor"/>
   </urndef>
   <metadata name="_Use0to100EvaluationRange" value="false"/>
   <dynamicContexts name="DynamicContext12" id="12" groups="11"/>
